@@ -1,14 +1,15 @@
 extends CharacterBody2D
 
+var hp = 5
 
-const SPEED = 14000
+@export var SPEED = 8000
 
 func _ready():
 	$AnimationPlayer.play('idle')
 
 func _physics_process(delta):
 	# Add the gravity.
-
+	$Camera2D/TextureProgressBar.value = hp
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_vector("a", "d", "w", "s")
@@ -25,3 +26,8 @@ func _physics_process(delta):
 		$sprite.flip_h = true
 	if velocity.x < 0:
 		$sprite.flip_h = false
+
+
+func _on_hitbox_area_entered(area):
+	if area.is_in_group('fish'):
+		hp -= 1
