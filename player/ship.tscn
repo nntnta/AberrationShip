@@ -59,6 +59,9 @@ vframes = 3
 position = Vector2(-0.5, 19)
 shape = SubResource("RectangleShape2D_el3sc")
 
+[node name="invulnerable" type="Timer" parent="hitbox"]
+wait_time = 0.5
+
 [node name="Camera2D" type="Camera2D" parent="."]
 process_callback = 0
 position_smoothing_speed = 1.0
@@ -83,3 +86,4 @@ libraries = {
 }
 
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="timeout" from="hitbox/invulnerable" to="." method="_on_invulnerable_timeout"]

@@ -29,5 +29,13 @@ func _physics_process(delta):
 
 
 func _on_hitbox_area_entered(area):
-	if area.is_in_group('fish'):
+	if area.is_in_group('fish') && $sprite.self_modulate == Color(1,1,1):
+		$sprite.self_modulate = Color(2.5,0,0)
+		$sprite.z_index += 3
+		$hitbox/invulnerable.start()
 		hp -= 1
+
+
+func _on_invulnerable_timeout():
+	$sprite.z_index = 3
+	$sprite.self_modulate = Color(1,1,1)
