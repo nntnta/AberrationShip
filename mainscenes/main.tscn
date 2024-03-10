@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://icwmmfsovrdx"]
+[gd_scene load_steps=7 format=3 uid="uid://icwmmfsovrdx"]
 
 [ext_resource type="PackedScene" uid="uid://cyg610v58k3df" path="res://player/ship.tscn" id="1_2gv5c"]
 [ext_resource type="Texture2D" uid="uid://xgcri4jibp4b" path="res://pics/bg/waters.png" id="1_46h5f"]
 [ext_resource type="Shader" path="res://mainscenes/waters.gdshader" id="1_qd63x"]
+[ext_resource type="PackedScene" uid="uid://bkmx8p8t81sc1" path="res://player/indicator.tscn" id="3_f25ls"]
 [ext_resource type="PackedScene" uid="uid://cryv0sflbodgj" path="res://enemy/fish_red.tscn" id="4_tn51q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o0xg8"]
@@ -22,6 +23,8 @@ material = SubResource("ShaderMaterial_o0xg8")
 scale = Vector2(2, 2)
 texture = ExtResource("1_46h5f")
 centered = false
+
+[node name="indicator" parent="." instance=ExtResource("3_f25ls")]
 
 [node name="ship" parent="." instance=ExtResource("1_2gv5c")]
 position = Vector2(499, 262)

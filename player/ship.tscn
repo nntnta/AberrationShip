@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cyg610v58k3df"]
+[gd_scene load_steps=9 format=3 uid="uid://cyg610v58k3df"]
 
 [ext_resource type="Script" path="res://player/ship.gd" id="1_8wu0e"]
 [ext_resource type="Texture2D" uid="uid://cupbq7nujm4y6" path="res://pics/player/player_ship.png" id="1_qfifv"]
+[ext_resource type="PackedScene" uid="uid://c8dq7ivt5tpkp" path="res://player/anchor.tscn" id="2_xqvaj"]
 [ext_resource type="Texture2D" uid="uid://b6aqtwfg8npjg" path="res://pics/player/heart_border.png" id="3_hk13k"]
 [ext_resource type="Texture2D" uid="uid://drlnwarq78ofq" path="res://pics/player/heart.png" id="4_8gknj"]
 
@@ -45,6 +46,7 @@ _data = {
 [node name="ship" type="CharacterBody2D" groups=["player"]]
 motion_mode = 1
 script = ExtResource("1_8wu0e")
+anchor = ExtResource("2_xqvaj")
 SPEED = 7500
 
 [node name="sprite" type="Sprite2D" parent="."]
@@ -53,7 +55,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_qfifv")
 vframes = 3
 
-[node name="hitbox" type="Area2D" parent="."]
+[node name="hitbox" type="Area2D" parent="." groups=["ship"]]
 
 [node name="coll" type="CollisionShape2D" parent="hitbox"]
 position = Vector2(-0.5, 19)
@@ -85,5 +87,8 @@ libraries = {
 "": SubResource("AnimationLibrary_eofus")
 }
 
+[node name="CD" type="Timer" parent="."]
+
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="timeout" from="hitbox/invulnerable" to="." method="_on_invulnerable_timeout"]
+[connection signal="timeout" from="CD" to="." method="_on_cd_timeout"]

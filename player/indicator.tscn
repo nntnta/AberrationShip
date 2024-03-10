@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkmx8p8t81sc1"]
+
+[ext_resource type="Script" path="res://player/indicator.gd" id="1_cionw"]
+[ext_resource type="Texture2D" uid="uid://dq8lbd1l08g0e" path="res://pics/player/indicator.png" id="1_mtaa1"]
+
+[sub_resource type="Animation" id="Animation_k6ipe"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0.45, 0.55), Vector2(0.55, 0.45), Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d7c05"]
+_data = {
+"idle": SubResource("Animation_k6ipe")
+}
+
+[node name="indicator" type="Node2D"]
+script = ExtResource("1_cionw")
+
+[node name="sprite" type="Sprite2D" parent="."]
+z_index = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_mtaa1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_d7c05")
+}
