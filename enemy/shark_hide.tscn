@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=3 uid="uid://bmwbxg6eno5fj"]
+
+[ext_resource type="Script" path="res://enemy/shark_hide.gd" id="1_5l1i3"]
+[ext_resource type="Texture2D" uid="uid://d3gjhiseivaig" path="res://pics/fish/shark_hide.png" id="1_lr3xw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ry44e"]
+radius = 61.2046
+
+[sub_resource type="Animation" id="Animation_m2pni"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.4, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0.45, 0.55), Vector2(0.55, 0.45), Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_r2n6b"]
+resource_name = "taken"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0.65, 0.65), Vector2(0, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yluwu"]
+_data = {
+"idle": SubResource("Animation_m2pni"),
+"taken": SubResource("Animation_r2n6b")
+}
+
+[node name="shark_hide" type="Node2D"]
+script = ExtResource("1_5l1i3")
+
+[node name="sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_lr3xw")
+
+[node name="grabBox" type="Area2D" parent="."]
+
+[node name="coll" type="CollisionShape2D" parent="grabBox"]
+shape = SubResource("CircleShape2D_ry44e")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yluwu")
+}
+
+[connection signal="area_entered" from="grabBox" to="." method="_on_grab_box_area_entered"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://cryv0sflbodgj"]
+[gd_scene load_steps=14 format=3 uid="uid://cryv0sflbodgj"]
 
 [ext_resource type="Script" path="res://enemy/fish_red.gd" id="1_awqxp"]
+[ext_resource type="PackedScene" uid="uid://ihlfwk4y8qb6" path="res://enemy/life_saver.tscn" id="2_1o1at"]
 [ext_resource type="Texture2D" uid="uid://cvvklicx4m8dh" path="res://pics/fish/fish_red.png" id="2_ms7ua"]
 [ext_resource type="Script" path="res://enemy/state/state_machine.gd" id="3_ojtas"]
 [ext_resource type="Script" path="res://enemy/state/enemy_idle.gd" id="4_b0lxx"]
@@ -48,7 +49,7 @@ tracks/2/path = NodePath("sprite:z_index")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 1.1, 2.2),
+"times": PackedFloat32Array(0, 1.1, 2.1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [0, 3, 0]
@@ -96,7 +97,7 @@ tracks/6/path = NodePath("hitbox:monitoring")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 1.2, 1.9),
+"times": PackedFloat32Array(0, 1.1, 2.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -108,44 +109,15 @@ tracks/7/path = NodePath("hitbox:monitorable")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 1.2, 1.9),
+"times": PackedFloat32Array(0, 1.1, 2.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
 }
 
-[sub_resource type="Animation" id="Animation_0mwox"]
-resource_name = "idle"
-length = 2.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6, 1.4, 2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.95, 1.05), Vector2(1.05, 0.95), Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("sprite:frame_coords")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_w36oc"]
 resource_name = "dead"
-length = 4.0
+length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -165,19 +137,19 @@ tracks/1/path = NodePath("sprite:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 1.6, 4),
+"times": PackedFloat32Array(0, 0.2, 1.1, 2),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Color(100, 100, 100, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(4),
+"times": PackedFloat32Array(2),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -232,20 +204,98 @@ tracks/6/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"sprite_hidden"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_0mwox"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.4, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.95, 1.05), Vector2(1.05, 0.95), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_j41ci"]
+resource_name = "spawn"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(0.965936, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"finished_attack"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uqvw0"]
 _data = {
 "attack": SubResource("Animation_6d3rs"),
 "dead": SubResource("Animation_w36oc"),
-"idle": SubResource("Animation_0mwox")
+"idle": SubResource("Animation_0mwox"),
+"spawn": SubResource("Animation_j41ci")
 }
 
 [node name="fish_red" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_awqxp")
+drops = ExtResource("2_1o1at")
 
 [node name="sprite" type="Sprite2D" parent="."]
 self_modulate = Color(100, 100, 100, 1)
+y_sort_enabled = true
 texture = ExtResource("2_ms7ua")
+hframes = 2
 vframes = 6
 
 [node name="hurtbox" type="Area2D" parent="." groups=["fish"]]
@@ -276,7 +326,7 @@ initial_state = NodePath("idle")
 script = ExtResource("4_b0lxx")
 enemy = NodePath("../..")
 move_speed = 7000
-search_range = 500
+search_range = 450
 
 [node name="follow" type="Node" parent="stateMachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("5_n000a")
@@ -290,5 +340,8 @@ libraries = {
 "": SubResource("AnimationLibrary_uqvw0")
 }
 
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="timeout" from="hitbox/hit_feedback" to="." method="_on_hit_feedback_timeout"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]

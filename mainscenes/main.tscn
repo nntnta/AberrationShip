@@ -1,15 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://icwmmfsovrdx"]
+[gd_scene load_steps=9 format=3 uid="uid://icwmmfsovrdx"]
 
 [ext_resource type="PackedScene" uid="uid://cyg610v58k3df" path="res://player/ship.tscn" id="1_2gv5c"]
 [ext_resource type="Texture2D" uid="uid://xgcri4jibp4b" path="res://pics/bg/waters.png" id="1_46h5f"]
+[ext_resource type="Script" path="res://mainscenes/main.gd" id="1_i01ul"]
 [ext_resource type="Shader" path="res://mainscenes/waters.gdshader" id="1_qd63x"]
 [ext_resource type="PackedScene" uid="uid://bkmx8p8t81sc1" path="res://player/indicator.tscn" id="3_f25ls"]
+[ext_resource type="PackedScene" uid="uid://bhhu03lc8pfsm" path="res://enemy/silver_fish.tscn" id="3_m214n"]
 [ext_resource type="PackedScene" uid="uid://cryv0sflbodgj" path="res://enemy/fish_red.tscn" id="4_tn51q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o0xg8"]
 shader = ExtResource("1_qd63x")
 
 [node name="main" type="Node2D"]
+script = ExtResource("1_i01ul")
+red_fish = ExtResource("4_tn51q")
+silver_fish = ExtResource("3_m214n")
+metadata/_edit_horizontal_guides_ = [-514.0, -2293.0]
+metadata/_edit_vertical_guides_ = [-3128.0]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -29,4 +36,11 @@ centered = false
 [node name="ship" parent="." instance=ExtResource("1_2gv5c")]
 position = Vector2(499, 262)
 
-[node name="fish_red" parent="." instance=ExtResource("4_tn51q")]
+[node name="red_fish" type="Timer" parent="."]
+wait_time = 4.0
+
+[node name="silver_fish" type="Timer" parent="."]
+wait_time = 0.7
+
+[connection signal="timeout" from="red_fish" to="." method="_on_red_fish_timeout"]
+[connection signal="timeout" from="silver_fish" to="." method="_on_silver_fish_timeout"]

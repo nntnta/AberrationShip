@@ -15,6 +15,10 @@ run/main_scene="res://mainscenes/main.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://pics/bg/waters.png"
 
+[autoload]
+
+global="*res://global.gd"
+
 [display]
 
 window/stretch/mode="canvas_items"
