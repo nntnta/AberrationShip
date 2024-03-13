@@ -26,6 +26,7 @@ func _process(_delta):
 		spawn_life_saver()
 		$AnimationPlayer.play('dead')
 		global.score += 500
+		global.red -= 1
 
 func _physics_process(delta):
 	velocity = velocity * speed

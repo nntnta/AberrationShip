@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://datnhh8qow6t3"]
+
+[ext_resource type="Texture2D" uid="uid://bvhnfyeo7u2wy" path="res://pics/bg/retry.png" id="1_3i1of"]
+[ext_resource type="Script" path="res://mainscenes/game_over.gd" id="1_4ry2r"]
+[ext_resource type="FontFile" uid="uid://cmm6yglqwoi67" path="res://fonts/PixelifySans-Medium.ttf" id="2_0cbdk"]
+[ext_resource type="Shader" path="res://mainscenes/waters.gdshader" id="2_41jo0"]
+[ext_resource type="FontFile" uid="uid://msxmi1p3hu1a" path="res://fonts/PixelifySans-SemiBold.ttf" id="3_fa2e1"]
+[ext_resource type="Texture2D" uid="uid://xgcri4jibp4b" path="res://pics/bg/waters.png" id="3_mlssm"]
+[ext_resource type="Texture2D" uid="uid://cu0j1ygp5of66" path="res://pics/bg/retry_normal.png" id="6_ffmat"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vp74d"]
+shader = ExtResource("2_41jo0")
+
+[node name="game_over" type="Node2D"]
+script = ExtResource("1_4ry2r")
+
+[node name="Label" type="Label" parent="."]
+z_index = 1
+offset_left = 450.0
+offset_top = 142.0
+offset_right = 760.0
+offset_bottom = 215.0
+theme_override_fonts/font = ExtResource("2_0cbdk")
+theme_override_font_sizes/font_size = 60
+text = "GAME OVER"
+
+[node name="Label2" type="Label" parent="."]
+z_index = 2
+offset_left = 592.0
+offset_top = 283.0
+offset_right = 632.0
+offset_bottom = 356.0
+theme_override_fonts/font = ExtResource("3_fa2e1")
+theme_override_font_sizes/font_size = 60
+horizontal_alignment = 1
+
+[node name="bg" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_vp74d")
+position = Vector2(575, 318)
+scale = Vector2(1.83125, 1.83125)
+texture = ExtResource("3_mlssm")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = 978.0
+offset_top = 472.0
+offset_right = 1298.0
+offset_bottom = 792.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("6_ffmat")
+texture_hover = ExtResource("1_3i1of")
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

@@ -1,18 +1,23 @@
 extends CharacterBody2D
 
-var hp = 5
 var shot = false
 @export var anchor: PackedScene
 @export var SPEED = global.speed
 
 func _ready():
 	$AnimationPlayer.play('idle')
-	
+	global.score = 0
+	global.cd = 1
+	global.speed = 8000
+	global.hp = 5
+	global.red = 0
+	global.silver = 0
+	Transition.already_dead = false
 
 func _physics_process(delta):
 	# Add the gravity.
 	$CD.wait_time = global.cd
-	$Camera2D/TextureProgressBar.value = hp
+	$Camera2D/TextureProgressBar.value = global.hp
 	$score.text = 'SCORE: ' + str(global.score)
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -42,7 +47,7 @@ func _on_hitbox_area_entered(area):
 		$sprite.self_modulate = Color(2.5,0,0)
 		$sprite.z_index += 3
 		$hitbox/invulnerable.start()
-		hp -= 1
+		global.hp -= 1
 
 
 func _on_invulnerable_timeout():

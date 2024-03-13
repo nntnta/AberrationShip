@@ -18,6 +18,7 @@ config/icon="res://pics/bg/waters.png"
 [autoload]
 
 global="*res://global.gd"
+Transition="*res://transition.tscn"
 
 [display]
 

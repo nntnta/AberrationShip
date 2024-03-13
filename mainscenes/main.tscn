@@ -37,10 +37,10 @@ centered = false
 position = Vector2(499, 262)
 
 [node name="red_fish" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 1.25
 
 [node name="silver_fish" type="Timer" parent="."]
-wait_time = 0.7
+wait_time = 0.5
 
 [connection signal="timeout" from="red_fish" to="." method="_on_red_fish_timeout"]
 [connection signal="timeout" from="silver_fish" to="." method="_on_silver_fish_timeout"]

@@ -13,7 +13,7 @@ func _process(delta):
 
 func _on_grab_box_area_entered(area):
 	if area.is_in_group('ship'):
-		global.cd -= 0.1
+		global.cd -= 0.15
 		$AnimationPlayer.play('taken')
 
 func destroy():

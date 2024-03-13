@@ -15,7 +15,9 @@ func _process(delta):
 
 
 func _on_red_fish_timeout():
-	spawn_red_fish()
+	if global.red <= 20:
+		spawn_red_fish()
+		global.red += 1
 
 func spawn_red_fish():
 	var rand_location = Vector2(randi_range(-3000,3000),randi_range(-3000,3000))
@@ -25,7 +27,9 @@ func spawn_red_fish():
 
 
 func _on_silver_fish_timeout():
-	spawn_silver_fish()
+	if global.silver <= 25:
+		spawn_silver_fish()
+		global.silver += 1
 
 func spawn_silver_fish():
 	var rand_location = Vector2(randi_range(-4000,4000),randi_range(-4000,4000))

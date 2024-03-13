@@ -13,6 +13,6 @@ func _process(delta):
 
 func _on_grab_box_area_entered(area):
 	if area.is_in_group('ship'):
-		global.speed += 200
+		global.speed += 1000
 		$AnimationPlayer.play('taken')
 

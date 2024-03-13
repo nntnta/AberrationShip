@@ -326,7 +326,7 @@ initial_state = NodePath("idle")
 script = ExtResource("4_b0lxx")
 enemy = NodePath("../..")
 move_speed = 7000
-search_range = 450
+search_range = 550
 
 [node name="follow" type="Node" parent="stateMachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("5_n000a")
